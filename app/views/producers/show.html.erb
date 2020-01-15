@@ -1,0 +1,110 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <h3 class="ribbon4"><%= @producer.producer_name %>について</h3><br>
+                  <%= attachment_image_tag @producer, :producer_image, size: "300x300", format: 'jpeg' ,fallback: "no_image.jpg"%><br>
+                  <div class="user">生産者名</div>
+                    <p><%= @producer.producer_name %></p>
+                  <div class="user">郵便番号</div>
+                      <p><%= @producer.post %></p>
+                  <div class="user">住所</div>
+                      <p><%= @producer.a_address %></p>
+                  <div class="user">お問い合わせ先電話番号</div>
+                      <p><%= @producer.phone %></p>
+                  <div class="user">お問い合わせ先メールアドレス</div>
+                      <p><%= @producer.email %></p>
+
+                  <% if @producer == current_producer %>
+                    <p><%= link_to "プロフィール編集", edit_producer_path(@producer), :class=>"button"   %></p>
+                    <p><%= link_to '退会', producer_path(@producer), method: :delete, data: { confirm: '退会しますか？' }, :class=>"button"  %></p>
+                  <% end %>
+        </div>
+<!--         <div class="col-md-3">
+                  <h3 class="ribbon4">この生産者の周辺マップ</h3><br>
+                      <% @maps.each do |map| %>
+                      <P><%= map.address %>付近のマップ</P>
+                      <% end %>
+                  <div id="map" style="height: 300px; width: 300px;"></div>
+                  <%=
+                    map(:center => {
+                        :latlng => [36, 140],
+                        :zoom => 4,
+                    })
+                  %>
+                <script>
+                  // rubyから渡された住所配列をjsの変数に格納
+                  var maps = <%= @maps.to_json.html_safe %>;
+
+                  for(var hash_count = 0; hash_count < maps.length; hash_count++){
+                    // 緯度経度とコメントを取り出しマーカー化
+                    L.marker(maps[hash_count].lonlat.split(','), {icon: L.icon({iconUrl: "/marker.png"})},)
+                      .bindPopup(maps[hash_count].comment)
+                      .addTo(map);
+                      //スケールコントロールを最大幅200px、右下、m単位で地図に追加
+                      L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(map);
+
+                      //地図の中心とズームレベルを指定
+                      map.setView([35.40, 136], 7);
+
+                      //地理院地図の標準地図タイル
+                      var gsi =L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', 
+                        {attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"});
+                      //地理院地図の淡色地図タイル
+                      var gsipale = L.tileLayer('http://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png',
+                        {attribution: "<a href='http://portal.cyberjapan.jp/help/termsofuse.html' target='_blank'>地理院タイル</a>"});
+                      //オープンストリートマップのタイル
+                      var osm = L.tileLayer('http://tile.openstreetmap.jp/{z}/{x}/{y}.png',
+                        {  attribution: "<a href='http://osm.org/copyright' target='_blank'>OpenStreetMap</a> contributors" });
+                      //baseMapsオブジェクトのプロパティに3つのタイルを設定
+                      var baseMaps = {
+                        "地理院地図" : gsi,
+                        "淡色地図" : gsipale,
+                        "オープンストリートマップ"  : osm
+                      };
+                      //layersコントロールにbaseMapsオブジェクトを設定して地図に追加
+                      //コントロール内にプロパティ名が表示される
+                      L.control.layers(baseMaps).addTo(map);
+                      gsi.addTo(map);
+                      //地図のclickイベントでonMapClick関数を呼び出し
+                      map.on('click', onMapClick);
+                      }
+                      function onMapClick(e) {
+                      //地図のclickイベント呼び出される
+                      //クリック地点の座標にマーカーを追加、マーカーのclickイベントでonMarkerClick関数を呼び出し
+                      var mk = L.marker(e.latlng).on('click', onMarkerClick).addTo(map);
+                      }
+                      function onMarkerClick(e) {
+                      //マーカーのclickイベント呼び出される
+                      //クリックされたマーカーを地図のレイヤから削除する
+                      map.removeLayer(e.target);
+
+                  }
+                </script>
+                <h3 class="ribbon4">この生産者の閲覧数：</h3>
+                <p><%= number_with_delimiter(@page_views) %>PV</p>
+        </div> -->
+        <div class="col-md-9">
+                      <h3 class="ribbon4">この生産者の商品一覧</h3><br>
+                      <% @products.each do |product| %>
+                      <%= attachment_image_tag product, :product_image, size: "300x300", format: 'jpeg' ,fallback: "no_image.jpg"%>
+                      <dt><div class="user"><%= product.product_name %></div>
+                 <details>
+                   <summary>商品詳細</summary>
+                    <div class="box8">
+                      <dl>
+                        <dt><div class="user"><%= product.product_name %></div></dt>
+                        <dt><div class="user"><%= product.detail %></div></dt>
+                        <dt><div class="user">この商品についているタブ
+                          <p><%= raw(product.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')) %></p>
+                        </div></dt>
+                      </dl>
+                    </div>
+                  </details>
+                      <% end %>
+<!--                   <h5>返信一覧</h5>
+                          <% @replys.each do |reply| %>
+                          <%= reply.comment %>
+                  <% end %> -->
+        </div>
+    </div>
+</div>

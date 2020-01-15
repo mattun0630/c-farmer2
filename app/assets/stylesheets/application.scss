@@ -1,0 +1,292 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require leaflet
+ *= require leaflet.markercluster
+ *= require leaflet.markercluster.default
+ */
+
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+.button {
+display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  border-radius: 4px;
+  color: #ffffff;
+  background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  border-bottom: solid 3px #c58668;
+  
+}
+
+.button {
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+  border-bottom: none;
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 200px;
+}
+
+.contents-item{
+  text-align:center; /*各要素を中央寄せ*/
+  float: left;
+  width:25%;
+  margin-bottom: 150px;
+  }
+
+.round {
+  padding: 10px;
+  border: 1px solid black;
+  background: grey;
+  color: white;
+  width: 100px;
+  border-radius: 10px;
+}
+
+.box30 {
+    margin: 2em 0;
+    background: #f1f1f1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.22);
+}
+.box30 .box-title {
+    font-size: 1.2em;
+    background: #5fc2f5;
+    padding: 4px;
+    text-align: center;
+    color: #FFF;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+.box30 p {
+    padding: 15px 20px;
+    margin: 0;
+}
+
+.box10 {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #00BCD4;
+    background: #e4fcff;/*背景色*/
+    border-top: solid 6px #1dc1d6;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);/*影*/
+}
+.box10 p {
+    margin: 0; 
+    padding: 0;
+}
+
+textarea {
+  resize: none;
+  width:800px;
+  height:200px;
+}
+
+.user {
+  position: relative;
+  padding-left: 1.2em;/*アイコン分のスペース*/
+  line-height: 1.4;
+}
+
+.user:before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f00c";/*アイコンのユニコード*/
+  position: absolute;/*絶対位置*/
+  font-size: 1em;/*サイズ*/
+  left: 0;/*アイコンの位置*/
+  top: 0;/*アイコンの位置*/
+  color: #5ab9ff; /*アイコン色*/
+}
+.box8 {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #232323;
+    background: #fff8e8;
+    border-left: solid 10px #ffc06e;
+}
+.box8 p {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.ribbon4 {
+  display: inline-block;
+  position: relative;
+  height: 60px;/*高さ*/
+  line-height: 60px;/*高さ*/
+  text-align: center;
+  padding: 0 40px 0 18px;/*文字の左右の余白*/
+  font-size: 18px;/*文字サイズ*/
+  background: #CF8151;/*背景色*/
+  color: #FFF;/*文字色*/
+  box-sizing: border-box;
+}
+
+.ribbon4:after {
+  position: absolute;
+  content: '';
+  width: 0px;
+  height: 0px;
+  z-index: 1;
+}
+
+.ribbon4:after {
+  top: 0;
+  right: 0;
+  border-width: 30px 15px 30px 0px;
+  border-color: transparent #fff transparent transparent;
+  border-style: solid;
+}
+
+.devise {
+  position: relative;
+  padding: 0.2em 0.5em;
+  background: -webkit-linear-gradient(to right, rgb(255, 124, 111), #ffc994);
+  background: linear-gradient(to right, rgb(255, 124, 111), #ffc994);
+  color: white;
+  font-weight: lighter;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.56);
+}
+
+.body {
+    background: #F3E5C8;
+
+}
+
+
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #7C9995;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0,0,0,.16);
+}
+.global-nav {
+  position: fixed;
+  right: -320px; /* これで隠れる */
+  top: 0;
+  width: 300px; /* スマホに収まるくらい */
+  height: 100vh;
+  padding-top: 40px;
+  background-color: #fff;
+  transition: all .6s;
+  z-index: 200;
+  overflow-y: auto; /* メニューが多くなったらスクロールできるように */
+}
+.hamburger {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40px; /* クリックしやすいようにちゃんと幅を指定する */
+  height: 40px; /* クリックしやすいようにちゃんと高さを指定する */
+  cursor: pointer;
+  z-index: 300;
+}
+.global-nav__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.global-nav__item {
+  text-align: center;
+  padding: 0 14px;
+}
+.global-nav__item a {
+  display: block;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  text-decoration: none;
+  color: #111;
+}
+.global-nav__item a:hover {
+  background-color: #eee;
+}
+.hamburger__line {
+  position: absolute;
+  left: 11px;
+  width: 18px;
+  height: 1px;
+  background-color: #111;
+  transition: all .6s;
+}
+.hamburger__line--1 {
+  top: 14px;
+}
+.hamburger__line--2 {
+  top: 20px;
+}
+.hamburger__line--3 {
+  top: 26px;
+}
+.black-bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  background-color: #000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .6s;
+  cursor: pointer;
+}
+/* 表示された時用のCSS */
+.nav-open .global-nav {
+  right: 0;
+}
+.nav-open .black-bg {
+  opacity: .8;
+  visibility: visible;
+}
+.nav-open .hamburger__line--1 {
+  transform: rotate(45deg);
+  top: 20px;
+}
+.nav-open .hamburger__line--2 {
+  width: 0;
+  left: 50%;
+}
+.nav-open .hamburger__line--3 {
+  transform: rotate(-45deg);
+  top: 20px;
+}
+
+@import url('http://fonts.googleapis.com/css?family=Henny+Penny');
+
+@font-face {
+    font-family: 'Kaushan Script';
+    src: url('https://themes.googleusercontent.com/static/fonts/kaushanscript/v1/qx1LSqts-NtiKcLw4N03IFhlQWQpSCpzb2Peu3I-Q34.woff') format('woff');
+}
+
+div.henny {
+  font-size: 24px;
+  font-family: 'Henny Penny', cursive;
+  position: absolute;
+  top: 5px;
+}

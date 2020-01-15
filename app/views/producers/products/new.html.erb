@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+			<h3 class="ribbon4">商品新規追加</h3>
+			<%= form_for(@product, url: producers_products_path) do |f| %>
+				<p><%= f.label :product_image, "商品画像" %></p>
+				<%= f.attachment_field  :product_image %>
+			    <p><%= f.label :product_name, "商品名" %></p>
+			    <%= f.text_field :product_name %>
+			    <p><%= f.label :detail, "商品概要" %></p>
+			    <%= f.text_area :detail %>
+                <details>
+                  <summary>タグ入力　※１個以上必須　</summary>
+                    <dl>
+                      <dt>
+                        <div class="box8">
+						    <% @tags.each do |tag| %>
+							    <%= f.check_box :tag_list, { multiple: true }, "#{tag.name}", nil %>
+							    <%= f.label " #{tag.name}(#{tag.taggings_count})" %>
+						  	<% end %>
+						</div>
+                      </dt>
+                    </dl>
+                </details>
+			   <%= f.submit '保存', :class=>"button"   %>
+			<% end %>
+		</div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <h3 class="ribbon4">地図情報変更</h3>
+            <%= form_for(@map, url: producers_maps_path) do |form| %>
+                <div class="user"><%= form.label :address, "市町村まで入力" %></div>
+                <p><%= form.text_field :address %></p>
+                <div class="user"><%= form.label :comment, "地図マーカーに一言コメント" %></div>
+                <p><%= form.text_field :comment %></p>
+            <!--   <div class="field">
+                <%= form.label :lonlat %>
+                <%= form.text_field :lonlat %>
+              </div> -->
+                <%= form.submit  %>
+          <% end %>
+        </div>
+    </div>
+</div>
+
+
+<%#= link_to 'Back', producers_maps_path %>

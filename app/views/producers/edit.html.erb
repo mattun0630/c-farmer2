@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+			<h3 class="ribbon4">基本情報変更</h3>
+				<%= form_for(@producer) do |f| %>
+				<h4>Image</h4>
+				<%= f.attachment_field  :producer_image %>
+			    <h5>事業者名</h5>
+			    <%= f.text_field :producer_name %>
+
+				<h5>郵便番号</h5>
+				<%= f.text_field :post %>
+
+				<h5>住所</h5>
+				<%= f.text_field :a_address %>
+
+				<h5>電話番号</h5>
+				<%= f.text_field :phone %>
+
+			    <h5>メールアドレス</h5>
+			    <%= f.text_field :email %>
+
+				<%= f.submit '基本情報を変更する' %>
+			<% end %>
+			<%= link_to '生産者メニューへ', producer_path(@producer) %>
+		</div>
+    </div>
+</div>

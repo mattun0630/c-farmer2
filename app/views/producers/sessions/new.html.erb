@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+          <h2 class="text-center">
+            <div class="devise">会員登録</div>
+          </h2>
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="field">
+                <p class="text-center">
+                  <%= f.label :email %><br />
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                </p>
+              </div>
+
+              <div class="field">
+                <p class="text-center">
+                  <%= f.label :password %><br />
+                  <%= f.password_field :password, autocomplete: "current-password" %>
+                </p>
+              </div>
+
+              <% if devise_mapping.rememberable? %>
+                <div class="field">
+                  <p class="text-center">
+                    <%= f.check_box :remember_me %>
+                    <%= f.label :remember_me %>
+                  </p>
+                </div>
+              <% end %>
+
+              <div class="actions">
+                <p class="text-center">
+                  <%= f.submit "Log in", :class=>"button"   %>
+                </p>
+              </div>
+            <% end %>
+            <p class="text-center">
+              <%= render "producers/shared/links" %>
+            </p>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>CFarmer</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  </head>
+
+  <body class="body">
+        <header class="header">
+    <div>
+      <div class='henny'>C farmer</div>
+    </div>
+    <nav class="global-nav">
+    <ul class="global-nav__list">
+      <% if user_signed_in? %>
+    <li class="global-nav__item"><a href=""><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></a></li>
+      <% if current_user.try(:admin?) %>
+        <li class="global-nav__item"><a href=""><%= link_to "管理者ページへ", rails_admin_path %></a></li>
+      <% end %>
+    <li class="global-nav__item"><a href=""><%= link_to "マイページ", user_path(current_user.id) %></a></li>
+    <li class="global-nav__item"><a href=""><%= link_to "投稿してみる", new_users_post_path %></a></li>
+    <li class="global-nav__item"><a href=""><%= link_to "全ての商品を見る", products_path %></a></li>
+    <li class="global-nav__item"><a href=""><%= link_to "全ての投稿を見る", posts_path %></a></li>
+    <li class="global-nav__item"><a href=""><%= link_to "全ての生産者を見る", producers_path %></a></li>
+      <% elsif producer_signed_in? %>
+      <li class="global-nav__item"><a href="">
+        <%= link_to "ログアウト", destroy_producer_session_path, method: :delete %>
+      </a></li>
+      <li class="global-nav__item"><a href=""><%= link_to "マイページ", producer_path(current_producer.id) %></a></li>
+      <li class="global-nav__item"><a href=""><%= link_to '商品を追加する', new_producers_product_path %></a></li>
+      <li class="global-nav__item"><a href=""><%= link_to "全ての商品を見る", products_path %></a></li>
+      <li class="global-nav__item"><a href=""><%= link_to "全ての投稿を見る", posts_path %></a></li>
+      <li class="global-nav__item"><a href=""><%= link_to "全ての生産者を見る", producers_path %></a></li>
+      <% else %>
+      <li class="global-nav__item"><a href=""><%= link_to "ユーザ新規登録", new_user_registration_path %></a></li>
+      <li class="global-nav__item"><a href=""><%= link_to "ユーザログイン", new_user_session_path %></a></li>
+      <li class="global-nav__item"><a href=""><%= link_to "生産者新規登録", new_producer_registration_path %></a></li>
+      <li class="global-nav__item"><a href=""><%= link_to "生産者ログイン", new_producer_session_path %></a></li>
+      <li class="global-nav__item"><a href=""><%= link_to "全ての商品を見る", products_path %></a></li>
+      <li class="global-nav__item"><a href=""><%= link_to "全ての投稿を見る", posts_path %></a></li>
+      <li class="global-nav__item"><a href=""><%= link_to "全ての生産者を見る", producers_path %></a></li>
+      <% end %>
+    </ul>
+    </nav>
+    <div class="hamburger" id="js-hamburger">
+    <span class="hamburger__line hamburger__line--1"></span>
+    <span class="hamburger__line hamburger__line--2"></span>
+    <span class="hamburger__line hamburger__line--3"></span>
+    </div>
+    <div class="black-bg" id="js-black-bg"></div>
+    </header>
+    <div style="margin-top: 50px">
+    <%= yield %>
+    </div>
+    <script type="text/javascript">
+      function toggleNav() {
+      let body = document.body;
+      let hamburger = document.getElementById('js-hamburger');
+      let blackBg = document.getElementById('js-black-bg');
+
+      hamburger.addEventListener('click', function() {
+        body.classList.toggle('nav-open');
+      });
+      blackBg.addEventListener('click', function() {
+        body.classList.remove('nav-open');
+      });
+    }
+    toggleNav();
+    </script>
+  </body>
+</html>

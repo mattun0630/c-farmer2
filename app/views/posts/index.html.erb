@@ -1,0 +1,64 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+			<h3 class="ribbon4">投稿一覧</h3><br>
+			<div>
+			 <img src='https://images.unsplash.com/photo-1531564701487-f238224b7ce3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=666&q=80' width=350 />
+			</div>
+	</div>
+	<div class="col-md-9">
+		<% @posts.each do |post| %>
+				<%#= attachment_image_tag post.user.user_image, :user_image, :fill, 15, 15, format: 'jpeg' ,fallback: "no_image.jpg"%>
+				<div class="user">
+					<%= link_to user_path(post.user_id) do %>
+					『<%= post.user.user_name %>』
+					<% end %>さんが
+					『<%= post.follow_producer %>』さんの
+					『<%= post.follow_item %>』に
+					『<%= post.title %>』を投稿しました。
+					時間：<%= post.created_at %>
+				</div>
+				    <details>
+				      <summary>内容について見る</summary>
+					<dl>
+					 <dt>
+					  <div class="box8">
+					   <%= post.description %>
+					  </div>
+					 </dt>
+					</dl>
+				    </details>
+				    <% post.replys.each do |reply| %>
+				    <details>
+				      <summary>返信を見る</summary>
+					<dl>
+					  <dt>
+					   <div class="box10">
+					    <%= link_to producer_path(reply.producer_id) do %>
+					     『<%= reply.producer.producer_name %>』
+						<% end %>さんが返信しました
+						<p>『<%= reply.comment %>』</p>
+						<p>時間：<%= reply.created_at %></p>
+					    </div>
+					  </dt>
+					</dl>
+				      </details>
+				      <% end %>
+			<% if producer_signed_in? %>
+				 <%= link_to post_path(post) do %>
+					『<%= post.user.user_name %>』さんのコメントに返信
+				 <% end %>
+			<% end %>
+			<% if user_signed_in? %>
+				<% if post.favorited_by?(current_user) %> <!-- ログインしているユーザーがファボしたかどうかで分岐 -->
+				<p><span></span><%=link_to "いいね！済み", post_favorites_path(post.id), method: :delete, :class=>"button"   %></p>
+				<% else %>
+				<p><span></span><%=link_to "いいね！する", post_favorites_path(post.id), method: :post , :class=>"button"  %></p>
+					<% end %>
+				<% else %>
+					<p><span>お気に入り数: </span><%= post.favorites.count %></p>
+			<% end %>
+		<% end %>
+	</div>
+    </div>
+</div>

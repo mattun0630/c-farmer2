@@ -1,0 +1,87 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Maps</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Address</th>
+      <th>Comment</th>
+      <th>Lonlat</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @maps.each do |map| %>
+      <tr>
+        <td><%= map.address %></td>
+        <td><%= map.comment %></td>
+        <td><%= map.lonlat %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Map', new_producers_map_path %>
+
+<div id="map" style="height: 350px; width: 350px;"></div>
+
+<%=
+  map(:center => {
+      :latlng => [36, 140],
+      :zoom => 4,
+  })
+%>
+
+<script>
+  // rubyから渡された住所配列をjsの変数に格納
+  var maps = <%= @maps.to_json.html_safe %>;
+
+  for(var hash_count = 0; hash_count < maps.length; hash_count++){
+    // 緯度経度とコメントを取り出しマーカー化
+    L.marker(maps[hash_count].lonlat.split(','), {icon: L.icon({iconUrl: "/marker.png"})},)
+      .bindPopup(maps[hash_count].comment)
+      .addTo(map);
+      //スケールコントロールを最大幅200px、右下、m単位で地図に追加
+      L.control.scale({ maxWidth: 200, position: 'bottomright', imperial: false }).addTo(map);
+
+      //地図の中心とズームレベルを指定
+      map.setView([35.40, 136], 7);
+
+      //地理院地図の標準地図タイル
+      var gsi =L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', 
+        {attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"});
+      //地理院地図の淡色地図タイル
+      var gsipale = L.tileLayer('http://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png',
+        {attribution: "<a href='http://portal.cyberjapan.jp/help/termsofuse.html' target='_blank'>地理院タイル</a>"});
+      //オープンストリートマップのタイル
+      var osm = L.tileLayer('http://tile.openstreetmap.jp/{z}/{x}/{y}.png',
+        {  attribution: "<a href='http://osm.org/copyright' target='_blank'>OpenStreetMap</a> contributors" });
+      //baseMapsオブジェクトのプロパティに3つのタイルを設定
+      var baseMaps = {
+        "地理院地図" : gsi,
+        "淡色地図" : gsipale,
+        "オープンストリートマップ"  : osm
+      };
+      //layersコントロールにbaseMapsオブジェクトを設定して地図に追加
+      //コントロール内にプロパティ名が表示される
+      L.control.layers(baseMaps).addTo(map);
+      gsi.addTo(map);
+      //地図のclickイベントでonMapClick関数を呼び出し
+      map.on('click', onMapClick);
+      }
+      function onMapClick(e) {
+      //地図のclickイベント呼び出される
+      //クリック地点の座標にマーカーを追加、マーカーのclickイベントでonMarkerClick関数を呼び出し
+      var mk = L.marker(e.latlng).on('click', onMarkerClick).addTo(map);
+      }
+      function onMarkerClick(e) {
+      //マーカーのclickイベント呼び出される
+      //クリックされたマーカーを地図のレイヤから削除する
+      map.removeLayer(e.target);
+
+  }
+</script>

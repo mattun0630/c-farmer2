@@ -1,0 +1,69 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+			<h3 class="ribbon4">マイページ</h3><br>
+			<%= attachment_image_tag @user, :user_image, size: "300x300", format: 'jpeg' ,fallback: "no_image.jpg"%><br>
+			<div class="user">ニックネーム</div>
+				<p><%= @user.user_name %></p>
+			<div class="user">メールアドレス</div>
+				<p><%= @user.email %></p>
+				<% if @user.id == current_user.id %>
+					<p><%= link_to "基本情報変更", edit_user_path(@user), :class=>"button"  %></p>
+					<p><%= link_to '退会', user_path(@user), method: :delete, data: { confirm: '退会しますか？' }, :class=>"button"  %></p>
+				<% end %>
+		</div>
+    	<div class="col-md-3">
+			<h3 class="ribbon4">自分の全ての投稿</h3><br>
+			<% @posts.each do |post| %>
+				<div class="user">『<%= post.user.user_name %>』さんの『<%= post.title %>』</div>
+				<details>
+                  <summary>投稿詳細を見る</summary>
+                    <div class="box8">
+                      <dl>
+                        <dt>
+							<%= post.description %>
+						</dt>
+                      </dl>
+                    </div>
+                </details>
+			<% end %>
+		</div>
+		<div class="col-md-3">
+			<h3 class="ribbon4">お気に入りした全ての投稿</h3><br>
+				<% @favorite_posts.each do |post| %>
+				<div class="user"><%= link_to user_path(post.user_id) do %>『<%= post.user.user_name %>』<% end %>さんの『<%= post.title %>』</div>
+						<details>
+		                  <summary>投稿詳細を見る</summary>
+		                    <div class="box8">
+		                      <dl>
+		                        <dt>
+									<%= post.description %>
+								</dt>
+		                      </dl>
+		                    </div>
+		                </details>
+				<% end %>
+		</div>
+
+		<div class="col-md-3">
+			<h3 class="ribbon4">フォロー中の生産者</h3><br>
+			<% @follow_producers.each do |producer| %>
+				<p><%= link_to producer.producer_name, producer_path(producer.id), :class=>"button"  %></p>
+				<details>
+                  <summary>生産者詳細を見る</summary>
+                    <div class="box8">
+                      <dl>
+                        <dt>
+                        	<%= attachment_image_tag producer, :producer_image, size: "250x250", format: 'jpeg' ,fallback: "no_image.jpg"%><br>
+	                       	問い合わせ電話番号:<br><%= producer.phone %><br>
+							問い合わせメールアドレス:<br><%= producer.email %>
+						</dt>
+                      </dl>
+                    </div>
+                </details>
+			<% end %>
+		</div>
+  </div>
+</div>
+
+

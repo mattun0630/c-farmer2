@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+		<% if producer_signed_in? %>
+			<%= form_for([@post, @reply]) do |f| %>
+			    <h3 class="ribbon4"><%= f.label :comment,"返信する" %></h3><br>
+			    <%= f.text_area :comment %><br>
+			  <%= f.submit %>
+			<% end %>
+		<% end %>
+		</div>
+    </div>
+</div>

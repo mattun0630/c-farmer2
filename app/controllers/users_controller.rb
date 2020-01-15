@@ -1,0 +1,20 @@
+class UsersController < ApplicationController
+  def show
+  	  @user = User.find(params[:id])
+      @posts = @user.posts
+      @favorite_posts = @user.favorite_posts
+      @follow_producers = @user.follow_producers
+  end
+  def edit
+      @user = User.find(params[:id])
+  end
+  def update
+	    @user = User.find(params[:id])
+	    @user.update(user_params)
+	    redirect_to user_path(@user.id)
+  end
+  private
+  def user_params
+    params.require(:user).permit(:user_name, :email, :post, :a_address, :phone, :user_image)
+  end
+end

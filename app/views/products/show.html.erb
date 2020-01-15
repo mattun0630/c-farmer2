@@ -1,0 +1,15 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+        	<%= attachment_image_tag @product, :product_image, size: "400x400", format: 'jpeg' ,fallback: "no_image.jpg"%>
+        </div>
+        <div class="col-md-8">
+			<h3 class="ribbon4">商品詳細</h3><br>
+			<div class="user">商品名:<%= @product.product_name %></div>
+            <div class="user">生産者名：<%= @product.producer.producer_name %></div>
+            <div class="user">閲覧数：<%= number_with_delimiter(@page_views) %>PV</div>
+			<div class="user">商品概要</div>
+			<div class="box8"><%= @product.detail %></div>
+		</div>
+    </div>
+</div>

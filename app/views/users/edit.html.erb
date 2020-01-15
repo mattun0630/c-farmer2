@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+			<h3 class="ribbon4">基本情報変更</h3>
+					<%= form_for(@user) do |f| %>
+						<h5>プロフィール写真</h5>
+							<%= f.attachment_field  :user_image %>
+					    <h5>ニックネーム</h5>
+					    	<%= f.text_field :user_name %>
+						<h5>郵便番号</h5>
+							<%= f.text_field :post %>
+						<h5>住所</h5>
+							<%= f.text_field :a_address %>
+						<h5>電話番号</h5>
+							<%= f.text_field :phone %>
+					    <h5>メールアドレス</h5>
+					    	<%= f.text_field :email %><br>
+						<%= f.submit '基本情報を変更する' %>
+					<% end %>
+		</div>
+    </div>
+</div>
+

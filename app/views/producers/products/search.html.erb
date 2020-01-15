@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+          <h3 class="ribbon4">商品検索結果</h3>
+          <div>
+            <img src='https://images.unsplash.com/photo-1518567283970-1be575199348?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80' width=350 />
+            </div>
+        </div>
+        <div class="col-md-8">
+
+                <% @products.each do |product| %>
+
+                    	<%= link_to product_path(product) do %>
+                    		<%= attachment_image_tag product, :product_image, size: "300x250", format: 'jpeg' ,fallback: "no_image.jpg"%><br>
+              	        <div class="user">商品名：<%= product.product_name %></div>
+                        <% end %>
+                        <%= link_to producer_path(product.producer_id) do %>
+                            <div class="user">生産者名：<%= product.producer.producer_name %></div>
+                        <% end %>
+              	        <div class="user">詳細：<%= product.detail %></div>
+                        <div class="user">タグ：<%= raw(product.tag_list.map { |t| link_to t, tag_path(t) }.join(' ')) %></div>
+                        <br>
+
+                <% end %>
+
+        </div>
+    </div>
+</div>

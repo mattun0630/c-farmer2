@@ -1,0 +1,13 @@
+<%= @post.title %>
+<%= @post.description %>
+<% if @post.user == current_user %>
+  <%= link_to "削除", post_path(@post), method: :delete %>
+<% end %>
+<% @post.each do |post| %>
+  <hr>
+  <p><%=link_to post.title, post_path(post.id) %></p>
+<% end %>
+<% @favorite_posts.each do |post| %>
+  <hr>
+  <p><span>ファボツイート内容: </span><%=link_to post.body, post_path(post.id) %></p>
+<% end %
