@@ -11,7 +11,6 @@ class ProductsController < ApplicationController
   end
   def show
       @product = Product.find(params[:id])
-      # impressionist(@product, nil, :unique => [:session_hash])
   end
   def search
       @products = Product.where("product_name LIKE ?", "%#{product_params[:product_name]}%")
