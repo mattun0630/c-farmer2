@@ -8,7 +8,7 @@ class ProducersController < ApplicationController
       # @user = User.find(params[:id])
       # impressionist(@producer, nil, :unique => [:session_hash])
 
-      @page_views = @producer.impressionist_count
+      # @page_views = @producer.impressionist_count
  end
  def edit
       @producer = Producer.find(params[:id])
