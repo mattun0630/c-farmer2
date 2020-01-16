@@ -113,8 +113,6 @@ GEM
       domain_name (~> 0.5)
     i18n (1.8.1)
       concurrent-ruby (~> 1.0)
-    impressionist (1.6.1)
-      nokogiri (~> 1)
     io-like (0.3.0)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
@@ -295,7 +293,6 @@ DEPENDENCIES
   devise
   font-awesome-rails
   geocoder
-  impressionist
   jbuilder (~> 2.5)
   jquery-rails
   jquery-turbolinks

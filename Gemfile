@@ -90,8 +90,6 @@ gem "jquery-rails"
 
 gem 'jquery-turbolinks'
 
-gem 'impressionist'
-
 group :production do
   gem 'mysql2'
 end
