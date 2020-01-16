@@ -6,9 +6,7 @@ class ProducersController < ApplicationController
   	  @reply_posts= @producer.reply_posts
       @maps =@producer.maps.last(1)
       # @user = User.find(params[:id])
-      # impressionist(@producer, nil, :unique => [:session_hash])
 
-      # @page_views = @producer.impressionist_count
  end
  def edit
       @producer = Producer.find(params[:id])
