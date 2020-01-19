@@ -10,8 +10,7 @@
 		<% @posts.each do |post| %>
 				<%#= attachment_image_tag post.user.user_image, :user_image, :fill, 15, 15, format: 'jpeg' ,fallback: "no_image.jpg"%>
 				<div class="user">
-					『<%= post.user.user_name %>』
-					さんが
+					『<%= post.user.user_name %>』さんが
 					『<%= post.follow_producer %>』さんの
 					『<%= post.follow_item %>』に
 					『<%= post.title %>』を投稿しました。
